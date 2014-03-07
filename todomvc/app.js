@@ -1,4 +1,3 @@
-
 /* The presenter */
 
 (function() { 'use strict';
@@ -47,7 +46,9 @@
     })
 
   }).on("toggle", function(item) {
-    toggle($("#" + item.id), !!item.done)
+    toggle($("#" + item.id), !!item.done);
+    refreshList(location.hash);
+    counts();
 
   }).on("edit", function(item) {
     var el = $("#" + item.id);
@@ -68,8 +69,8 @@
   $.route(function(hash) {
 
     // clear list and add new ones
-    root.empty() && $.each(todo.items(hash.slice(2)), add)
-
+    refreshList(hash);
+    
     // selected class
     nav.removeClass("selected").filter("[href='" + hash + "']").addClass("selected");
 
@@ -80,6 +81,10 @@
 
 
   /* Private functions */
+
+  function refreshList(hash) {
+    root.empty() && $.each(todo.items(hash.slice(2)), add)
+  }
 
   function toggle(el, flag) {
     el.toggleClass("completed", flag);
