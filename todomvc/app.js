@@ -148,6 +148,7 @@
     $("#todo-count").html("<strong>" +active+ "</strong> item" +(active == 1 ? "" : "s")+ " left")
     $("#clear-completed").toggle(done > 0).text("Clear completed (" + done + ")")
     $("#footer, #main").toggle(active + done > 0)
+    $("#toggle-all").prop("checked", active == 0)
   }
 
 })()
