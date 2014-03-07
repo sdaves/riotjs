@@ -27,9 +27,19 @@
   })
 
   $("#toggle-all").click(function() {
-    $("li", root).each(function() {
-      todo.toggle(this.id);
+    var list = todo.items();
+    var foundActive = false;
+    $(list).each(function(idx, item) {
+      if (!item.done) {
+        foundActive = true;
+        todo.toggle(item.id);
+      }
     })
+    if (!foundActive) {
+      $(list).each(function(idx, item) {
+        todo.toggle(item.id);
+      })
+    }
   })
 
   $("#clear-completed").click(function() {
